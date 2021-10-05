@@ -1,0 +1,37 @@
+{
+  "pluginName": "截图工具",
+  "description": "截图工具",
+  "author": "xiaou",
+  "version": "1.0.0",
+  "logo": "logo.png",
+  "preload": "preload.js",
+  "features": [
+    {
+      "code": "shortcutCapture",
+      "explain": "截图工具",
+      "cmds": ["shortcutCapture", "sc", "截屏", "截图"]
+
+    },
+    {
+      "code": "shortcutCapture&copy",
+      "explain": "截图并复制",
+      "cmds": ["截图并复制", "scc"]
+
+    },
+    {
+      "code": "pictureBase64",
+      "explain": "截图工具",
+      "cmds": [
+        {
+          "type": "img",
+          "label": "截图工具"
+        },
+        {
+          "type": "regex",
+          "label": "base64图片",
+          "match": "/^data:image\/(bmp|gif|heic|jpeg|jpeg|jpeg|png|svg\\+xml|webp|x-icon);base64,/"
+        }
+      ]
+    }
+  ]
+}

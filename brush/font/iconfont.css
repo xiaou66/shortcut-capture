@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2840664 */
+  src: url('iconfont.woff2?t=1633132182549') format('woff2'),
+       url('iconfont.woff?t=1633132182549') format('woff'),
+       url('iconfont.ttf?t=1633132182549') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-recall-full:before {
+  content: "\ea12";
+}
+
+.icon-masaike:before {
+  content: "\e611";
+}
+
+.icon-Files-33:before {
+  content: "\e7f1";
+}
+
+.icon-shangchuan:before {
+  content: "\e62b";
+}
+
+.icon-xiangpi_huaban1:before {
+  content: "\e67b";
+}
+
+.icon-huabigongju-tuoyuan:before {
+  content: "\e61d";
+}
+
+.icon-huabi1:before {
+  content: "\e620";
+}
+
+.icon-ai37:before {
+  content: "\e69a";
+}
+
+.icon-huabigongju-juxing:before {
+  content: "\e61c";
+}
+
+.icon-move:before {
+  content: "\e616";
+}
+
+.icon-guanbi:before {
+  content: "\eca0";
+}
+
+.icon-baocun:before {
+  content: "\e625";
+}
+
+.icon-wenzi:before {
+  content: "\e652";
+}
+
+.icon-wenzisaomiao:before {
+  content: "\e605";
+}
+

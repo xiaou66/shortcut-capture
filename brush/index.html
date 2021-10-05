@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<header>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <link rel="stylesheet" href="./css/index.css">
+</header>
+<body>
+
+    <div id="container_outer">
+        <!-- 图片容器 -->
+        <div id="container">
+            <!--  提示框  -->
+            <div id="tips"></div>
+            <!-- 拖动容器  -->
+            <div id="container_move"></div>
+            <!-- 图片容器 -->
+            <canvas id="mainCanvas"></canvas>
+            <!-- 主画板 -->
+            <canvas id="drawCanvas"></canvas>
+            <!-- 辅助面板 -->
+            <canvas id="frontCanvas"></canvas>
+            <!-- 浮标 -->
+            <div id="cursor" style="width: 1px;height: 1px;"></div>
+        </div>
+    </div>
+    <div id="toolbarBox" style="position:absolute;">
+        <!-- 工具条 -->
+        <div id="toolbar" style="display: inline-flex">
+        </div>
+        <!--  辅助工具条  -->
+        <div>
+            <div id="settingBox" style="display: none">
+                <div name="color&size">
+                    <div class="fx">
+                        <div>大小</div>
+                        <div>
+                            <input name="number" id="lineWidth" value="1" style="width: 30px;margin: 0 10px;border: 1px solid #c3c3c3;padding: 2px"></input>
+                        </div>
+                    </div>
+                    <div class="fx">
+                        <div>颜色</div>
+                        <div style="margin: 0 10px;">
+                            <input id="strokeStyle" value="#ff0000" type="color" style="border: 1px dashed #c3c3c3;width: 23px;height: 23px;"></input>
+                        </div>
+                        <div class="colorChunkBox">
+                            <div name="strokeStyle" value="#000000" style="background:#000000;"></div>
+                            <div name="strokeStyle" value="#ffffff" style="background:#ffffff;"></div>
+                            <div name="strokeStyle" value="#ff0000" style="background:#ff0000;"></div>
+                            <div name="strokeStyle" value="#00ff00" style="background:#00ff00;"></div>
+                            <div name="strokeStyle" value="#777bce" style="background:#777bce;"></div>
+                            <div name="strokeStyle" value="#284f95" style="background:#284f95;"></div>
+                            <div name="strokeStyle" value="#ffb3cc" style="background:#ffb3cc;"></div>
+                            <div name="strokeStyle" value="#bfbed3" style="background:#bfbed3;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div name="textBox">
+                    <div class="fx">
+                        <div>字体大小</div>
+                        <div>
+                            <input name="number" id="fontSize" value="20" style="width: 30px;margin: 0 10px;border: 1px solid #c3c3c3;padding: 2px"></input>
+                        </div>
+                    </div>
+                    <div class="fx">
+                        <div>颜色</div>
+                        <div style="margin: 0 10px;">
+                            <input id="fontColor" value="#ff0000" type="color" style="border: 1px dashed #c3c3c3;width: 23px;height: 23px;"></input>
+                        </div>
+                        <div class="colorChunkBox">
+                            <div name="fontColor" value="#000000" style="background:#000000;"></div>
+                            <div name="fontColor" value="#ffffff" style="background:#ffffff;"></div>
+                            <div name="fontColor" value="#ff0000" style="background:#ff0000;"></div>
+                            <div name="fontColor" value="#00ff00" style="background:#00ff00;"></div>
+                            <div name="fontColor" value="#777bce" style="background:#777bce;"></div>
+                            <div name="fontColor" value="#284f95" style="background:#284f95;"></div>
+                            <div name="fontColor" value="#ffb3cc" style="background:#ffb3cc;"></div>
+                            <div name="fontColor" value="#bfbed3" style="background:#bfbed3;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./html2canvas.min.js"></script>
+    <script type="text/javascript" src="./mousetrap.min.js"></script>
+    <script type='module' src="./index.js"></script>
+</body>
+</html>
