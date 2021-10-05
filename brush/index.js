@@ -189,7 +189,9 @@ class Palette {
         }
     }
     async canvasToBase64() {
-        return await html2canvas(this.$mainContainer).then(function(canvas) {
+        this.$mainContainer.style.borderRadius = '0';
+        return await html2canvas(this.$mainContainer).then((canvas) => {
+            this.$mainContainer.style.borderRadius = '6px';
             return canvas.toDataURL();
         });
     }
