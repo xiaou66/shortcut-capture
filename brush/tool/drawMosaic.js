@@ -4,13 +4,14 @@ const config = {
     icon: '&#xe611;',
     name: 'mosaic',
     history: true,
-    useKeyword: '7'
+    useKeyword: '7',
+    cursor: true
 }
-let size = 8;
+let size = 10;
 function mouseMove(e) {
     const {startX, startY} = this.startPosition;
 
-    const data = this.mainContext.getImageData(e.offsetX, e.offsetY, size, size).data;
+    const data = this.mainContext.getImageData(e.offsetX / 2, e.offsetY / 2, size, size).data;
     let r = 0, g = 0, b = 0;
     for (let row = 0; row < size; row ++) {
         for (let col = 0; col < size; col++) {
@@ -26,20 +27,27 @@ function mouseMove(e) {
     this.drawContext.beginPath()
     this.drawContext.save()
     this.drawContext.fillStyle = color
-    this.drawContext.fillRect(e.offsetX, e.offsetY, size, size)
+    this.drawContext.fillRect(e.offsetX, e.offsetY - (size / 2), size, size)
     this.drawContext.restore()
 }
 function init() {
+    this.setCursorSize(size, false);
+    document.body.onmousewheel = (event) => {
+        const value = size + (event.deltaY < 0 ? 2 : -2);
+        size = value <= 0 ? 2 : value;
+        this.setCursorSize(size, false);
+    }
     window.Mousetrap.bind('=', () => {
         size++;
-        this.setCursorSize(size);
+        this.setCursorSize(size, false);
     });
     window.Mousetrap.bind('-', () => {
         size--;
-        this.setCursorSize(size)
+        this.setCursorSize(size, false);
     });
 }
 function destroy() {
+    document.body.onmousewheel = null;
     window.Mousetrap.unbind('=');
     window.Mousetrap.unbind('-');
 }

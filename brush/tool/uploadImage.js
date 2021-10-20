@@ -5,19 +5,33 @@ const config = {
     name: 'uploadImage',
     useKeyword: 'ctrl+f'
 }
+const data = window.UToolsUtils.read('globalKey');
+if (data) {
+    const keyword = data[config.name]
+    if (keyword) {
+        config.useKeyword = keyword.split('|');
+    }
+}
 // 工具初始化
 function init(priorToolName, toolName) {
+    const {port = 4126, bed = "", uploadLaterClose = false} = window.UToolsUtils.read('uploadImage/setting') || {};
+    console.log(bed)
     this.canvasToBase64().then(async (imageBase64) => {
        try {
-           const url = await fetch('http://localhost:4126', {
+           const url = await fetch(`http://localhost:${port}`, {
                method: 'POST',
                headers: {
                    'Content-Type': 'application/x-www-form-urlencoded'
                },
-               body: `base64=${imageBase64}&autoCopy=true`
+               body: bed
+                   ? `base64=${imageBase64}&autoCopy=true&bed=${bed}`
+                   : `base64=${imageBase64}&autoCopy=true`
            }).then(res => res.text());
            if (url) {
                this.showTips('上传成功');
+               if (uploadLaterClose) {
+                   window.ipcRendererUtils.winClose();
+               }
            }
        }catch (e) {
            this.showTips('上传失败');

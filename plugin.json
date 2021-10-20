@@ -19,6 +19,11 @@
 
     },
     {
+      "code": "shortcutCaptureSetting",
+      "explain": "截图设置",
+      "cmds": ["截图设置", "sx"]
+    },
+    {
       "code": "pictureBase64",
       "explain": "截图工具",
       "cmds": [

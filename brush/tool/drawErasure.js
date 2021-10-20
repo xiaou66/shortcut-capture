@@ -5,6 +5,7 @@ const config = {
     name: 'erasure',
     useKeyword: '6',
     history: true,
+    cursor: true,
 }
 let num = 50;
 function mouseMove(e) {
@@ -23,16 +24,23 @@ function mouseMove(e) {
 }
 
 function init() {
+    this.setCursorSize(num, false);
+    document.body.onmousewheel = function(event) {
+        const value = num + (event.deltaY < 0 ? 2 : -2);
+        num = value <= 0 ? 2 : value;
+        this.setCursorSize(num, false);
+    }.bind(this)
     window.Mousetrap.bind('=', () => {
         num++;
-        this.setCursorSize(num);
+        this.setCursorSize(num, false);
     });
     window.Mousetrap.bind('-', () => {
         num--;
-        this.setCursorSize(num)
+        this.setCursorSize(num, false)
     });
 }
 function destroy() {
+    document.body.onmousewheel = null;
     window.Mousetrap.unbind('=');
     window.Mousetrap.unbind('-');
 }

@@ -114,9 +114,10 @@ input {
     display: inline-flex;
     align-items: center;
     z-index: 100 !important;
+    user-select: none;
 }
 #toolbarBox {
-    right: 0;
+    /*right: 0;*/
 }
 #settingBox {
     border-radius: 6px;

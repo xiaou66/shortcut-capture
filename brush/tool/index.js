@@ -12,8 +12,10 @@ import close from "./close.js";
 import drawMosaic from "./drawMosaic.js";
 import ocr from "./ocr.js";
 import backout from "./backout.js";
+import saveClose from "./saveClose.js";
 const tool = {
     rectangle,
+    saveClose,
     circle,
     brush,
     move,
@@ -54,6 +56,9 @@ function GroupBy(array, fn) {
 }
 export const getToolConfig = (toolName) => {
     return tool[toolName].config;
+}
+export const getToolEvent = (toolName, event) => {
+    return tool[toolName][event];
 }
 // 工具箱初始化方法
 export function toolBoxInit() {

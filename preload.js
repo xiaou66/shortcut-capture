@@ -1,4 +1,7 @@
 const { ipcRenderer } = require('electron')
+const Nano = require('nano-jsx')
+const {jsx} = require('nano-jsx')
+const {SettingUI} = require('./Setting/index.jsx')
 window.runList = [];
 const buildImage = async (base64) => {
     return new Promise((resolve, reject) => {
@@ -39,8 +42,10 @@ const createWindow = async (imgBase64, callback = undefined) => {
             devTools: true
         }}, () => {
         const data = {
-            dataURL: imgBase64
+            dataURL: imgBase64,
+            scale: display.scaleFactor
         }
+        console.log('scale', data)
         win.webContents.openDevTools({ mode: 'detach' });
         win.focus();
         const {width, height} = image;
@@ -50,6 +55,8 @@ const createWindow = async (imgBase64, callback = undefined) => {
             y < 0 ? 0 : y >= display.size.height ? display.size.height : y);
         // win.setResizable(false)
         ipcRenderer.sendTo(win.webContents.id, 'init', JSON.stringify(data));
+        console.log(point)
+        console.log(display)
         if (callback && typeof callback == 'function') {
             callback(win);
         }
@@ -61,6 +68,7 @@ window.exports = {
         mode: "none",
         args: {
             enter: async (action) => {
+                document.getElementById('setting')?.remove()
                 const displays = utools.getAllDisplays()
                 console.log(displays)
                 utools.screenCapture(async (imgBase64) => {
@@ -75,7 +83,7 @@ window.exports = {
         mode: "none",
         args: {
             enter: async ({payload}) => {
-                debugger;
+                document.getElementById('setting')?.remove()
                 const payloads = payload.split("#");
                 if (payloads.length === 1) {
                     await createWindow(payload);
@@ -93,13 +101,23 @@ window.exports = {
     "shortcutCapture&copy":  {
         mode: "none",
             args: {
-            enter: async ({payload}) => {
-                utools.screenCapture(async (imgBase64) => {
-                    utools.copyImage(imgBase64)
+                enter: async ({payload}) => {
+                    document.getElementById('setting')?.remove()
+                    utools.screenCapture(async (imgBase64) => {
+                        utools.copyImage(imgBase64)
+                        utools.hideMainWindow();
+                        utools.outPlugin();
+                    });
                     utools.hideMainWindow();
-                    utools.outPlugin();
-                });
-                utools.hideMainWindow();
+                }
+        }
+    },
+    "shortcutCaptureSetting": {
+        mode: 'none',
+        args: {
+            enter(action, callback) {
+                utools.setExpendHeight(480)
+                Nano.render(jsx`${SettingUI()}`, document.documentElement)
             }
         }
     }

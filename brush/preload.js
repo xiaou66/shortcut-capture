@@ -8,8 +8,8 @@ const fs = require('fs');
 // })
 window.ipcRendererUtils = new IpcRendererUtils({
     initCallback: (data) => {
-        const {dataURL} = data;
-        window.setImage(dataURL)
+        const {dataURL, scale} = data;
+        window.setImage(dataURL, scale)
     },
     windowCloseBefore: () => {
         window.ipcRendererUtils.winClose();
