@@ -13,6 +13,7 @@ import drawMosaic from "./drawMosaic.js";
 import ocr from "./ocr.js";
 import backout from "./backout.js";
 import saveClose from "./saveClose.js";
+import drawStraightLine from "./drawStraightLine.js";
 const tool = {
     rectangle,
     saveClose,
@@ -29,6 +30,7 @@ const tool = {
     close,
     mosaic: drawMosaic,
     backout,
+    straightLine: drawStraightLine,
 }
 /**
  * 工具类

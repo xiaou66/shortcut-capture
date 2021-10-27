@@ -1,10 +1,10 @@
 const config = {
     group: 1,
-    position: 5,
-    icon: '&#xe620;',
-    name: 'brush',
+    position: 4,
+    icon: '&#xe66d;',
+    name: 'straightLine',
     settingBox: 'color&size',
-    useKeyword: '6',
+    useKeyword: '5',
     canvas: false,
     history: true,
     cursor: true
@@ -12,17 +12,30 @@ const config = {
 const $lineWidth = document.getElementById('lineWidth')
 function mouseDown(e) {
     const {startX, startY} = this.startPosition;
-    this.drawContext.moveTo(startX,startY);
-    this.setCanvasStyle(this.drawContext);
-    this.drawContext.beginPath();
+    this.setCanvasStyle(this.frontContext);
 }
 function mouseMove(e) {
-    // this.drawContext.beginPath();
-    // this.drawContext.lineCap="round";
-    this.drawContext.lineTo(e.offsetX, e.offsetY);
-    this.drawContext.stroke();
+    const {startX, startY} = this.startPosition;
+    const X2 = e.offsetX;
+    const Y2 = e.offsetY;
+    this.clearFrontContext();
+    this.frontContext.beginPath();
+    this.frontContext.moveTo(startX,startY);
+    this.frontContext.lineTo(X2,Y2);
+    this.frontContext.lineTo(X2,Y2);
+    this.frontContext.stroke();
 }
 function mouseUp(e) {
+    this.clearFrontContext();
+    this.setCanvasStyle(this.drawContext);
+    const {startX, startY} = this.startPosition;
+    const X2 = e.offsetX;
+    const Y2 = e.offsetY;
+    this.drawContext.beginPath();
+    this.drawContext.moveTo(startX,startY);
+    this.drawContext.lineTo(X2,Y2);
+    this.drawContext.lineTo(X2,Y2);
+    this.drawContext.stroke()
 }
 // 工具初始化
 function init(priorToolName, toolName) {

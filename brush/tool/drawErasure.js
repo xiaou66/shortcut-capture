@@ -1,9 +1,9 @@
 const config = {
     group: 1,
-    position: 5,
+    position: 7,
     icon: '&#xe67b;',
     name: 'erasure',
-    useKeyword: '6',
+    useKeyword: '8',
     history: true,
     cursor: true,
 }

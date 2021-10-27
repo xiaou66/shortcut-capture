@@ -1,10 +1,10 @@
 const config = {
     group: 1,
-    position: 6,
+    position: 8,
     icon: '&#xe611;',
     name: 'mosaic',
     history: true,
-    useKeyword: '7',
+    useKeyword: '9',
     cursor: true
 }
 let size = 10;

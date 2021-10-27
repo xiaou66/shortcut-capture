@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "14421475",
+      "name": "图形-直线",
+      "font_class": "zhixian_huaban1",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "15325342",
+      "name": "0_round_数字0",
+      "font_class": "0_round",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
       "icon_id": "5387519",
       "name": "对号",
       "font_class": "duihao",
