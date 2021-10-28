@@ -1,7 +1,7 @@
-const { ipcRenderer } = require('electron')
-const Nano = require('nano-jsx')
-const {jsx} = require('nano-jsx')
-const {SettingUI} = require('./Setting/index.jsx')
+const { ipcRenderer } = require('electron');
+const Nano = require('nano-jsx');
+const {jsx} = require('nano-jsx');
+const {SettingUI} = require('./Setting/index.jsx');
 window.runList = [];
 const buildImage = async (base64) => {
     return new Promise((resolve, reject) => {

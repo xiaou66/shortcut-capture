@@ -1,6 +1,6 @@
 const { jsx, Component} = require('nano-jsx');
-const UToolsUtils = require('../UToolsUtils');
-const Mousetrap = require('../../brush/mousetrap-record.js')(require('../../brush/mousetrap.min.js'));
+const UToolsUtils = require('../../utils/UToolsUtils.js');
+const Mousetrap = require('../../brush/lib/mousetrap-record.js')(require('../../brush/lib/mousetrap.min.js'));
 class ToolSetting extends Component{
     saveKey = 'globalKey'
     keywordDefaultData = {

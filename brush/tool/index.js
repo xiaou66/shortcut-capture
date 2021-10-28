@@ -66,6 +66,9 @@ export const getToolEvent = (toolName, event) => {
 }
 // 工具箱初始化方法
 export function toolBoxInit() {
+    const data = UToolsUtils.read('toolShowSwitchData') || [];
+    const hideToolNames = data.filter(item => !item.enable).map(item => item.name);
+    console.log(hideToolNames);
     const configs = Object.keys(tool).map(key => {
         if (tool[key].config) {
             // 配置默认值
@@ -84,8 +87,12 @@ export function toolBoxInit() {
         }
         console.log(`${key}未配置`);
         return '';
-    }).filter(item => item !== '');
-
+    }).filter(item => item !== '')
+      .filter(item => !hideToolNames.includes(item.name));
+    if (configs.length === 0) {
+        document.getElementById('toolbar')?.remove();
+        return;
+    }
     // 进行分组
     const results = GroupBy(configs,  (item) => [item.group])
         .sort((a, b) => a[0].group - b[0].group)
@@ -105,20 +112,20 @@ export function toolBoxInit() {
         configs.map(config => {
             // 生成工具
             const $tool = document.createElement('div');
-            $tool.id = config.name;
+            $tool.id = `tool-${config.name}`;
             $tool.className = 'iconfont tool';
             $tool.innerHTML = config.icon;
             $tool.setAttribute('name', config.name);
             $toolbar.append($tool);
             if (config.hint) {
-                tippy(`#${config.name}`, {
+                tippy(`#tool-${config.name}`, {
                     content: config.hint,
                 });
             }
         });
     })
     // 删除第一个分隔符
-    document.querySelector('#toolbar>.separator:first-child').remove();
+    document.querySelector('#toolbar>.separator:first-child')?.remove();
 }
 function limitNumber() {
     this.value=this.value.replace(/\D/g,'');
@@ -127,4 +134,4 @@ function limitNumber() {
 // 设置为数字输入框增加条件
 document.querySelectorAll('input[name="number"]').forEach($inputNumber => {
     $inputNumber.onkeyup = limitNumber;
-})
+});

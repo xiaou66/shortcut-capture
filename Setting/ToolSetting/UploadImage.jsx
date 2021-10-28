@@ -1,5 +1,5 @@
 const { jsx, Component} = require('nano-jsx');
-const UToolsUtils = require('../UToolsUtils');
+const UToolsUtils = require('../../utils/UToolsUtils.js');
 class UploadImage extends Component{
     saveKey = 'uploadImage/setting';
     constructor(props) {
