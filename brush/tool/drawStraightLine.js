@@ -7,7 +7,8 @@ const config = {
     useKeyword: '5',
     canvas: false,
     history: true,
-    cursor: true
+    cursor: true,
+    hint: '画直线',
 }
 const $lineWidth = document.getElementById('lineWidth')
 function mouseDown(e) {

@@ -6,6 +6,7 @@ const config = {
     useKeyword: '8',
     history: true,
     cursor: true,
+    hint: '橡皮擦',
 }
 let num = 50;
 function mouseMove(e) {

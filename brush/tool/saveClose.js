@@ -3,7 +3,8 @@ const config = {
     position: 3,
     icon: '&#xeaf1;',
     name: 'saveClose',
-    useKeyword: ['ctrl+shift+c', 'enter']
+    useKeyword: ['ctrl+shift+c', 'enter'],
+    hint: '复制并关闭',
 }
 const data = window.UToolsUtils.read('globalKey');
 if (data) {

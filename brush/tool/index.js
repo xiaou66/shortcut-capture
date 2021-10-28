@@ -105,11 +105,17 @@ export function toolBoxInit() {
         configs.map(config => {
             // 生成工具
             const $tool = document.createElement('div');
+            $tool.id = config.name;
             $tool.className = 'iconfont tool';
             $tool.innerHTML = config.icon;
             $tool.setAttribute('name', config.name);
             $toolbar.append($tool);
-        })
+            if (config.hint) {
+                tippy(`#${config.name}`, {
+                    content: config.hint,
+                });
+            }
+        });
     })
     // 删除第一个分隔符
     document.querySelector('#toolbar>.separator:first-child').remove();

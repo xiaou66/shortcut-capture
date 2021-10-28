@@ -5,7 +5,8 @@ const config = {
     name: 'textBox',
     useKeyword: 'ctrl+t',
     settingBox: 'textBox',
-    canvas: false
+    canvas: false,
+    hint: '文本工具',
 }
 const $fontSize = document.getElementById('fontSize');
 const $fontColor = document.getElementById('fontColor');

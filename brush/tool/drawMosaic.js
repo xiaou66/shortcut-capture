@@ -5,7 +5,8 @@ const config = {
     name: 'mosaic',
     history: true,
     useKeyword: '9',
-    cursor: true
+    cursor: true,
+    hint: '马赛克',
 }
 let size = 10;
 function mouseMove(e) {

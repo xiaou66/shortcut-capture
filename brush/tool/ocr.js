@@ -3,7 +3,8 @@ const config = {
     position: 3,
     icon: '&#xe605;',
     name: 'ocr',
-    useKeyword: 'ctrl+q'
+    useKeyword: 'ctrl+q',
+    hint: '识别',
 }
 const data = window.UToolsUtils.read('globalKey');
 if (data) {

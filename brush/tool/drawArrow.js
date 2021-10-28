@@ -8,6 +8,7 @@ const config = {
     canvas: true,
     history: true,
     cursor: true,
+    hint: '箭头',
 }
 const $lineWidth = document.getElementById('lineWidth')
 function arrowCoordinate(x1,y1,x2,y2){

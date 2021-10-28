@@ -8,6 +8,7 @@ const config = {
     canvas: true,
     history: true,
     cursor: true,
+    hint: '画矩形',
 }
 const $lineWidth = document.getElementById('lineWidth')
 function mouseMove(e) {

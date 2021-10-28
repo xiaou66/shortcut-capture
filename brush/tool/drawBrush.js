@@ -7,7 +7,8 @@ const config = {
     useKeyword: '6',
     canvas: false,
     history: true,
-    cursor: true
+    cursor: true,
+    hint: '画笔',
 }
 const $lineWidth = document.getElementById('lineWidth')
 function mouseDown(e) {

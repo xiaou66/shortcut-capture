@@ -3,6 +3,7 @@ const config = {
     position: 2,
     icon: '&#xeca0;',
     name: 'close',
+    hint: '关闭',
 }
 // 工具初始化
 function init(priorToolName, toolName) {

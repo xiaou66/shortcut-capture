@@ -5,6 +5,7 @@ const config = {
     icon: '&#xe616;',
     name: 'move',
     useKeyword: '1',
+    hint: '移动',
 }
 function init(priorToolName, toolName) {
     $containerMove.style.display = 'block'

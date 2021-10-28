@@ -3,7 +3,8 @@ const config = {
     position: 2,
     icon: '&#xe62b;',
     name: 'uploadImage',
-    useKeyword: 'ctrl+f'
+    useKeyword: 'ctrl+f',
+    hint: '上传图床'
 }
 const data = window.UToolsUtils.read('globalKey');
 if (data) {

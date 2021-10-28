@@ -2,7 +2,8 @@ const config = {
     group: 3,
     position: 1,
     icon: '&#xe625;',
-    name: 'saveImage'
+    name: 'saveImage',
+    hint: '保存',
 }
 // 工具初始化
 function init(priorToolName, toolName) {

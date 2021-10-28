@@ -4,6 +4,7 @@ const config = {
     icon: '&#xe7f1;',
     useKeyword: 'q',
     name: 'suspension',
+    hint: '去悬浮插件',
 }
 // 工具初始化
 function init(priorToolName, toolName) {

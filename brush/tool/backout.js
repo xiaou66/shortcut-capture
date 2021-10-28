@@ -4,7 +4,8 @@ const config = {
     position: 11,
     icon: '&#xea12;',
     name: 'backout',
-    useKeyword: 'ctrl+z'
+    useKeyword: 'ctrl+z',
+    hint: '撤回',
 }
 // 工具初始化
 function init(priorToolName, toolName) {

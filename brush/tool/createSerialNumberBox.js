@@ -1,4 +1,4 @@
-import dragMove from '../dragmove.js';
+import dragMove from '../lib/dragmove.js';
 const config = {
     group: 1,
     position: 8,
@@ -6,7 +6,8 @@ const config = {
     name: 'serialNumberBox',
     useKeyword: 'ctrl+t',
     settingBox: 'textBox',
-    canvas: false
+    canvas: false,
+    hint: '序号工具',
 }
 const $fontSize = document.getElementById('fontSize');
 const $fontColor = document.getElementById('fontColor');
