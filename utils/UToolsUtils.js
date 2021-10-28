@@ -1,4 +1,3 @@
-
 class UToolsUtils {
   /**
    * 读取数据
@@ -7,6 +6,9 @@ class UToolsUtils {
    * @return {boolean|*}
    */
   static read (key, onlyData = true) {
+    if (!window.utools) {
+      return {};
+    }
     // @ts-ignore
     const data = window.utools.db.get(key)
     if (!data) {

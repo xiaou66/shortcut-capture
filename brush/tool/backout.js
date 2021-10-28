@@ -1,7 +1,7 @@
 import tool from "./index.js";
 const config = {
     group: 1,
-    position: 8,
+    position: 11,
     icon: '&#xea12;',
     name: 'backout',
     useKeyword: 'ctrl+z'

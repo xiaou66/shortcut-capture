@@ -14,6 +14,7 @@ import ocr from "./ocr.js";
 import backout from "./backout.js";
 import saveClose from "./saveClose.js";
 import drawStraightLine from "./drawStraightLine.js";
+import serialNumberBox from "./createSerialNumberBox.js";
 const tool = {
     rectangle,
     saveClose,
@@ -31,6 +32,7 @@ const tool = {
     mosaic: drawMosaic,
     backout,
     straightLine: drawStraightLine,
+    serialNumberBox,
 }
 /**
  * 工具类

@@ -1,6 +1,6 @@
 const config = {
     group: 1,
-    position: 7,
+    position: 9,
     icon: '&#xe67b;',
     name: 'erasure',
     useKeyword: '8',

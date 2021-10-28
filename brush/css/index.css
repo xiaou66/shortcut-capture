@@ -5,6 +5,7 @@
 }
 body {
     position: relative;
+    overflow: hidden;
 }
 input {
     outline: none;
@@ -102,6 +103,65 @@ input {
 .text_input::-webkit-scrollbar {
     display: none;
 }
+/* 序号工具 */
+#serial_number_box>div>div::-webkit-scrollbar {
+    display: none;
+}
+#serial_number_box>div {
+    position: absolute;
+    z-index: 10;
+    left: 50px;
+    top: 10px;
+    box-sizing: content-box;
+    background: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    outline: none;
+    min-width: 20px;
+    max-width: 100%;
+    min-height: 16px;
+    word-wrap:break-word;
+    word-break:break-all;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #ffffff;
+}
+#serial_number_box>div>div {
+    outline: none;
+    max-width: 100%;
+    word-wrap:break-word;
+    word-break:break-all;
+    color: #ffffff;
+    max-height: 100px;
+    overflow-y: auto;
+}
+#serial_number_box>div>span {
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    left: -30px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background: #369ff3;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 20px;
+    cursor: pointer;
+}
+/* 小箭头 */
+#serial_number_box>div::after {
+    content: '';
+    position: absolute;
+    left: -5.5px;
+    top: 8px;
+    display: block;
+    width: 6px;
+    height: 12px;
+    background: pink;
+    clip-path: polygon(0 50%, 100% 100%, 100% 0);
+    background: rgba(0,0,0,0.7);
+}
+/* 编号 */
 
 /* 工具条 */
 #toolbar, #settingBox {

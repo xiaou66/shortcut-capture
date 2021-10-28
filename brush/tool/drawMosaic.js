@@ -1,6 +1,6 @@
 const config = {
     group: 1,
-    position: 8,
+    position: 10,
     icon: '&#xe611;',
     name: 'mosaic',
     history: true,
