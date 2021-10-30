@@ -60,14 +60,21 @@ function mouseDown(e) {
         target.focus();
     }
     dragMove($divInput, $divInput, {
+        onStart: (el) => {
+            el.classList.add('text_input_move');
+        },
         onCheck: (el, e) => {
+            e.preventDefault();
             return !e.ctrlKey;
         },
         onMove: (el, x, y) => {
             return x > 0 && y > 0 &&
                 x + el.clientWidth < this.containerWidth && y + el.clientHeight < this.containerHeight;
         },
-        preventDefault: true
+        onEnd: (el) => {
+            el.classList.remove('text_input_move');
+        },
+        preventDefault: false
     });
 }
 function init(priorToolName, toolName) {
