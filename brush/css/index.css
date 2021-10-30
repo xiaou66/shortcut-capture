@@ -125,6 +125,15 @@ input {
     font-size: 12px;
     color: #ffffff;
 }
+#serial_number_box>.right {
+    transform: rotateY(180deg);
+}
+#serial_number_box>.right>span {
+    transform: rotateY(180deg);
+}
+#serial_number_box>.right>div{
+    transform: rotateY(180deg);
+}
 #serial_number_box>div>div {
     outline: none;
     max-width: 100%;

@@ -17,11 +17,11 @@ if (data) {
 function init(priorToolName, toolName) {
     this.canvasToBase64().then(imageBase64 => {
         const {ocrName = 'ocr'} = window.UToolsUtils.read('ocr/setting') || {};
+        utools.showMainWindow();
         utools.redirect(ocrName, {
             'type': 'img',
             'data': imageBase64
         });
-        utools.showMainWindow();
        setTimeout(() => {
            window.ipcRendererUtils.winClose();
        }, 100)

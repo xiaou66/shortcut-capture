@@ -68,7 +68,7 @@ window.exports = {
         mode: "none",
         args: {
             enter: async (action) => {
-                document.getElementById('setting')?.remove()
+                document.getElementById('setting')?.remove();
                 const displays = utools.getAllDisplays()
                 console.log(displays)
                 utools.screenCapture(async (imgBase64) => {

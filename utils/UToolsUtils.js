@@ -7,7 +7,7 @@ class UToolsUtils {
    */
   static read (key, onlyData = true) {
     if (!window.utools) {
-      return {};
+      return undefined;
     }
     // @ts-ignore
     const data = window.utools.db.get(key)

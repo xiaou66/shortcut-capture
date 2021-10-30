@@ -31,15 +31,20 @@ function mouseDown(e) {
     $textBox.contentEditable = true;
     console.log($serialNumberBox.children)
     $number.innerText = `${$serialNumberBox.children.length + 1}`;
-    if (startX + 23 > this.containerWidth) {
-        startX -= 25;
+    // x轴 边缘判断是否需要反方向
+    console.log(startX, this.containerWidth);
+    if (startX + 50 > this.containerWidth) {
+        $divInput.classList.add('right')
+        $divInput.style.left = `${startX - 66}px`;
+    } else {
+        $divInput.style.left = `${startX + 20}px`;
     }
     if (startY + 45 > this.containerHeight) {
         startY -= 42;
     }
     // 基本样式
     $textBox.style.maxHeight = `${this.containerHeight - startY}px`;
-    $divInput.style.left = `${startX + 20}px`;
+
     $divInput.style.top = `${startY - 15}px`;
     $divInput.style.fontFamily = 'Microsoft YaHei,Sans Serif,System UI';
     $divInput.style.fontSize = `${$fontSize.value}px`;
@@ -49,6 +54,10 @@ function mouseDown(e) {
     $serialNumberBox.append($divInput);
 
     const onMove = (el, x, y) => {
+        if (el.classList.contains('right')){
+            return x > 0 && y > 0 && x + 30 < this.containerWidth - el.offsetWidth
+                && y < this.containerHeight - el.offsetHeight;
+        }
         return x > 30 && y > 0 &&
             x < this.containerWidth - el.offsetWidth && y < this.containerHeight - el.offsetHeight;
     }
