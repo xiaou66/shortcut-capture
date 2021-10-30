@@ -7,14 +7,17 @@ let _callbacks = [];
 const _isTouch = window.ontouchstart !== undefined;
 /**
  *
- * @param target
- * @param handler
- * @param onStart
- * @param onEnd
- * @param onMove
+ * @param target         移动对象
+ * @param handler        拖动对象
+ * @param onStart        开始拖动处理回调函数
+ * @param onEnd          停止拖动处理回调函数
+ * @param onMove         移动时处理回调函数
+ * @param onCheck        进行检查是否允许拖动
+ * @param preventDefault 是否禁止默认事件
  */
 export const dragMove = function(target, handler, {
-  onStart = undefined, onEnd = undefined, onMove = undefined
+  onStart = undefined, onEnd = undefined, onMove = undefined, onCheck = undefined,
+  preventDefault= true,
 } = {}) {
   // Register a global event to capture mouse moves (once).
   if (!_loaded) {
@@ -23,7 +26,11 @@ export const dragMove = function(target, handler, {
       if (e.touches) {
         c = e.touches[0];
       }
-
+      if (onCheck) {
+        if (onCheck(e.target, e) === false) {
+          return false;
+        }
+      }
       // On mouse move, dispatch the coords to all registered callbacks.
       for (var i = 0; i < _callbacks.length; i++) {
         _callbacks[i](c.clientX, c.clientY);
@@ -39,7 +46,10 @@ export const dragMove = function(target, handler, {
   // to the point of click inside the element.
   handler.addEventListener(_isTouch ? "touchstart" : "mousedown", function(e) {
     e.stopPropagation();
-    e.preventDefault();
+    if (preventDefault) {
+      e.preventDefault();
+    }
+    // 当设置 dragEnabled 为 false 时不允许拖动
     if (target.dataset.dragEnabled === "false") {
       return;
     }

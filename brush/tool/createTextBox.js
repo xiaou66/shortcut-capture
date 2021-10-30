@@ -1,3 +1,4 @@
+import dragMove from '../lib/dragmove.js';
 const config = {
     group: 1,
     position: 7,
@@ -52,63 +53,22 @@ function mouseDown(e) {
         // this.pushHistory(config.name, $divInput);
         // console.log(this.history)
     }
-    let posX = 0, posY = 0;
-    let offsetLeft = 0, offsetTop = 0;
-    $divInput.onmousedown = (e) => {
-        $divInput.contentEditable = !e.altKey;
-        if (e.altKey) {
-            // 移动
-            const {clientX, clientY, offsetY, offsetX} = e;
-            posX = clientX;posY = clientY;
-            offsetLeft = offsetX;offsetTop = offsetY;
-            console.log(posX, posY);
-            console.log(offsetX, offsetY);
-            e.target.classList.add('text_input_active', 'text_input_move');
-            return;
-        }
-        e.target.classList.remove('text_input_move');
-
-        // window.textBoxFontSize = ($divInput) => setFontSize($divInput);
-        // window.textBoxFontColor = ($divInput) => setFontColor($divInput);
-        // $fontColor.addEventListener('change', window.textBoxFontSize);
-        // $fontSize.addEventListener('change', window.textBoxFontColor);
+    $divInput.onclick = (e) => {
+        const target = e.target;
+        target.contentEditable = true;
+        target.classList.add('text_input_active');
+        target.focus();
     }
-    $divInput.onmousemove = (e) => {
-        const $target = e.target;
-        console.log($target.classList.contains('text_input_move'))
-        if (!$target.classList.contains('text_input_move')) {
-            return;
-        }
-        let moveX = e.clientX -  offsetLeft;
-        let moveY = e.clientY -  offsetTop;
-        // 边界判断
-        if (moveX < 0) {
-            moveX = 0;
-        }
-        if (moveX > this.containerWidth - $target.offsetWidth) {
-            moveX = this.containerWidth - $target.offsetWidth;
-        }
-        if (moveY < 0) {
-            moveY = 0;
-        }
-        if (moveY > this.containerHeight - $target.offsetHeight) {
-            moveY = this.containerHeight - $target.offsetHeight;
-        }
-        //-------------
-        $target.style.left =  moveX + "px";
-        $target.style.top =  moveY + "px";
-        $fontColor.onchange = undefined;
-    }
-    $divInput.onmouseup = (e) => {
-        const $target = e.target;
-        if ($target.classList.contains('text_input_move')) {
-            e.target.classList.remove('text_input_move')
-        }
-        // $fontColor.removeEventListener('change', window.textBoxFontSize);
-        // $fontSize.removeEventListener('change', window.textBoxFontColor);
-        // delete window.textBoxFontColor;
-        // delete window.textBoxFontSize;
-    }
+    dragMove($divInput, $divInput, {
+        onCheck: (el, e) => {
+            return !e.ctrlKey;
+        },
+        onMove: (el, x, y) => {
+            return x > 0 && y > 0 &&
+                x + el.clientWidth < this.containerWidth && y + el.clientHeight < this.containerHeight;
+        },
+        preventDefault: true
+    });
 }
 function init(priorToolName, toolName) {
     document.querySelectorAll('.text_input')
