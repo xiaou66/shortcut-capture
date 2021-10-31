@@ -110,8 +110,8 @@ input {
 #serial_number_box>div {
     position: absolute;
     z-index: 10;
-    left: 50px;
-    top: 10px;
+    /*left: 50px;*/
+    /*top: 10px;*/
     box-sizing: content-box;
     background: rgba(0,0,0,0.7);
     border-radius: 10px;

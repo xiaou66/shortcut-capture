@@ -33,9 +33,10 @@ function mouseDown(e) {
     $number.innerText = `${$serialNumberBox.children.length + 1}`;
     // x轴 边缘判断是否需要反方向
     console.log(startX, this.containerWidth);
-    if (startX + 50 > this.containerWidth) {
+    if (startX + 80 > this.containerWidth) {
         $divInput.classList.add('right')
-        $divInput.style.left = `${startX - 66}px`;
+        $divInput.style.right = `${this.containerWidth - startX + 20}px`;
+        $divInput.dataset.right = 'true';
     } else {
         $divInput.style.left = `${startX + 20}px`;
     }
@@ -43,7 +44,7 @@ function mouseDown(e) {
         startY -= 42;
     }
     // 基本样式
-    $textBox.style.maxHeight = `${this.containerHeight - startY}px`;
+    $textBox.style.maxHeight = `${this.containerHeight - startY - 16}px`;
 
     $divInput.style.top = `${startY - 15}px`;
     $divInput.style.fontFamily = 'Microsoft YaHei,Sans Serif,System UI';
@@ -61,7 +62,24 @@ function mouseDown(e) {
         return x > 30 && y > 0 &&
             x < this.containerWidth - el.offsetWidth && y < this.containerHeight - el.offsetHeight;
     }
-    dragMove($divInput,$number, { onMove });
+    dragMove($divInput,$number, {
+        onStart: (el) => {
+            if (el.classList.contains('right')) {
+                const right = parseInt(el.style.right);
+                el.style.right = '';
+                el.style.left = `${this.containerWidth - right - el.clientWidth}px`;
+            }
+        },
+        onMove,
+        onEnd: (el) => {
+            $textBox.style.maxHeight = `${this.containerHeight - parseInt(el.style.top) - 16}px`;
+            if (el.dataset.right) {
+                const left = parseInt(el.style.left);
+                el.style.left = '';
+                el.style.right = `${this.containerWidth - left - el.clientWidth}px`;
+            }
+        }
+    });
     $textBox.onblur = (e) => {
         if (!e.target.innerText) {
             $divInput.remove();
@@ -70,7 +88,7 @@ function mouseDown(e) {
     }
     setTimeout(() => {
         $textBox.focus();
-    }, 200)
+    }, 200);
     this.isDown = false;
 }
 function init(priorToolName, toolName) {

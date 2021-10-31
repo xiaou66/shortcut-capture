@@ -29,7 +29,7 @@ function mouseDown(e) {
         startY -= 42;
     }
     // 基本样式
-    $divInput.style.maxHeight = `${this.containerHeight - startY}px`
+    $divInput.style.maxHeight = `${this.containerHeight - startY - 12}px`
     $divInput.style.left = startX + 'px';
     $divInput.style.top = startY + 'px';
     $divInput.style.fontFamily = 'Microsoft YaHei,Sans Serif,System UI';
@@ -54,6 +54,9 @@ function mouseDown(e) {
         // console.log(this.history)
     }
     $divInput.onclick = (e) => {
+        if ($divInput.classList.contains('text_input_active')) {
+            return;
+        }
         const target = e.target;
         target.contentEditable = true;
         target.classList.add('text_input_active');
@@ -70,10 +73,12 @@ function mouseDown(e) {
             return !e.ctrlKey;
         },
         onMove: (el, x, y) => {
+
             return x > 0 && y > 0 &&
                 x + el.clientWidth < this.containerWidth && y + el.clientHeight < this.containerHeight;
         },
         onEnd: (el) => {
+            el.style.maxHeight = `${this.containerHeight - parseInt(el.style.top) - 12}px`
             el.classList.remove('text_input_move');
         },
         preventDefault: false
