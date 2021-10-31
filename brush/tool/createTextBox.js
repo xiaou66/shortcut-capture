@@ -64,7 +64,9 @@ function mouseDown(e) {
             el.classList.add('text_input_move');
         },
         onCheck: (el, e) => {
-            e.preventDefault();
+            if(!e.ctrlKey) {
+                e.preventDefault();
+            }
             return !e.ctrlKey;
         },
         onMove: (el, x, y) => {

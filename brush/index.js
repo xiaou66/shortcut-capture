@@ -1,4 +1,9 @@
 // var canvasImg = document.getElementById("canvas_img")
+try {
+
+    console.log(process.env.NODE_ENV);
+}catch (e) {
+}
 import tool, { toolBoxInit, getToolConfig, getToolEvent } from './tool/index.js';
 const mineMap = {
     "image/bmp" : "bmp",
