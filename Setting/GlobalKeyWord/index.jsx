@@ -1,6 +1,7 @@
 const { jsx, Component} = require('nano-jsx');
 const UToolsUtils = require('../../utils/UToolsUtils.js');
-const Mousetrap = require('../../brush/lib/mousetrap-record.js')(require('../../brush/lib/mousetrap.min.js'));
+const Mousetrap = require('mousetrap-record')(require('../../brush/lib/mousetrap.min.js'));
+
 class ToolSetting extends Component{
     saveKey = 'globalKey'
     keywordDefaultData = {
@@ -11,9 +12,28 @@ class ToolSetting extends Component{
         tab: 'tab',
         clear: 'ctrl+p',
         clearAll: 'ctrl+shift+p',
-        randomColor: 'ctrl+r'
+        randomColor: 'ctrl+r',
+        textBox: 'ctrl+t',
+        serialNumberBox: 'ctrl+y',
+        move: '1',
+        close: 'esc',
+        suspension: 'q',
     }
-
+    generateHtmlData = [
+        { label: '复制', dataKey: 'copy' },
+        { label: '复制并关闭', dataKey: 'saveClose' },
+        { label: '上传图床', dataKey: 'uploadImage' },
+        { label: '文本工具', dataKey: 'textBox'},
+        { label: '序号工具', dataKey: 'serialNumberBox' },
+        { label: 'OCR', dataKey: 'ocr' },
+        { label: '显示/隐藏工具条', dataKey: 'tab' },
+        { label: '墨迹清屏', dataKey: 'clear' },
+        { label: '全部清屏', dataKey: 'clearAll' },
+        { label: '随机颜色', dataKey: 'randomColor' },
+        { label: '去悬浮工具', dataKey: 'suspension' },
+        { label: '拖拽工具', dataKey: 'move' },
+        { label: '关闭', dataKey: 'close'},
+    ];
     constructor(props) {
         super(props);
         this.keywordData = {...this.keywordDefaultData, ...UToolsUtils.read(this.saveKey)}
@@ -49,91 +69,27 @@ class ToolSetting extends Component{
     saveData() {
         UToolsUtils.save(this.saveKey, this.keywordData);
     }
+    generateHtml() {
+        const html = this.generateHtmlData.map(({label, dataKey}) => (jsx`
+            <div class="form-item inputBox">
+                <div class="tips">${label}</div>
+                <div class="input">
+                  <input id="${dataKey}" value="${this.keywordData[dataKey]}"  type="text" required
+                  onKeyUp=${(e) => this.recordKeyWord(e)}
+                  onChange=${(e) => this.valueChange(e, dataKey)}/>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                  <label for="${dataKey}">快捷键按「|」分割,按「alt + r」开始录制</label>
+              </div>
+            </div>
+        `))
+        return html;
+    }
     render() {
         return jsx`
             <div id="showTips"></div>
-            <div style="margin-top: 30px;display:flex;flex-direction:column;align-items: center;max-height: 90vh;overflow-y: auto;width: 100%;">
-                <div class="form-item inputBox">
-                    <div class="tips">复制</div>
-                    <div class="input">
-                      <input value="${this.keywordData.copy}"  type="text" required 
-                      onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'copy')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                <div class="form-item inputBox">
-                    <div class="tips">复制并关闭</div>
-                    <div class="input">
-                      <input value="${this.keywordData['saveClose']}"  type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'saveClose')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                       <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                <div class="form-item inputBox">
-                    <div class="tips">上传图床</div>
-                    <div class="input">
-                      <input value="${this.keywordData.uploadImage}"  type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'uploadImage')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                       <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                <div class="form-item inputBox">
-                    <div class="tips">OCR</div>
-                    <div class="input">
-                      <input value="${this.keywordData.ocr}"  type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'ocr')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                <div class="form-item inputBox">
-                    <div class="tips">显示/隐藏工具条</div>
-                    <div class="input">
-                      <input value="${this.keywordData.tab}" type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'tab')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                 <div class="form-item inputBox">
-                    <div class="tips">墨迹清屏</div>
-                    <div class="input">
-                      <input value="${this.keywordData.clear}" type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'clear')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                 <div class="form-item inputBox">
-                    <div class="tips">全部清屏</div>
-                    <div class="input">
-                      <input value="${this.keywordData.clearAll}" type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'clearAll')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
-                <div class="form-item inputBox">
-                    <div class="tips">随机颜色</div>
-                    <div class="input">
-                      <input value="${this.keywordData.randomColor}" type="text" required onKeyUp=${(e) => this.recordKeyWord(e)}
-                      onChange=${(e) => this.valueChange(e, 'randomColor')}/>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>快捷键按「|」分割,按「alt + r」开始录制</label>
-                  </div>
-                </div>
+            <div style="display:flex;flex-direction:column;align-items: center;width: 100%;">
+                ${this.generateHtml()}
             </div>
         `;
     }

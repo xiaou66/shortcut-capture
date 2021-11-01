@@ -1,8 +1,9 @@
-const {Fragment, jsx, Component} = require('nano-jsx');
-const {PureCss, CustomCss} = require('./css.js');
+const { Fragment, jsx, Component } = require('nano-jsx');
+const { PureCss, CustomCss } = require('./css.js');
 const ToolSetting = require('./ToolSetting/index.jsx');
 const GlobalKeyWord = require('./GlobalKeyWord/index.jsx');
 const ToolShowSwitch = require('./ToolShowSwitch/index.jsx');
+const { enable:  enableDarkMode } = require('darkreader');
 class SettingUI extends Component{
     settingMenu = {
         currentMenu: '工具设置',
@@ -11,6 +12,12 @@ class SettingUI extends Component{
             {id: 2, name: '全局快捷键', component: GlobalKeyWord},
             {id: 3, name: '工具显示切换', component: ToolShowSwitch}
         ]
+    }
+    constructor(props) {
+        super(props);
+        if (utools.isDarkColors()) {
+            enableDarkMode();
+        }
     }
     swatchMenu({name}) {
         this.settingMenu.currentMenu = name;

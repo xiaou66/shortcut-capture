@@ -4,6 +4,7 @@ const config = {
     icon: '&#xeca0;',
     name: 'close',
     hint: '关闭',
+    useKeyword: 'esc'
 }
 // 工具初始化
 function init(priorToolName, toolName) {

@@ -1,4 +1,4 @@
-import dragMove from '../lib/dragmove.js';
+import dragMove from '../dragmove.js';
 const config = {
     group: 1,
     position: 7,

@@ -6,13 +6,6 @@ const config = {
     useKeyword: 'ctrl+f',
     hint: '上传图床'
 }
-const data = window.UToolsUtils.read('globalKey');
-if (data) {
-    const keyword = data[config.name]
-    if (keyword) {
-        config.useKeyword = keyword.split('|');
-    }
-}
 // 工具初始化
 function init(priorToolName, toolName) {
     const {port = 4126, bed = "", uploadLaterClose = false} = window.UToolsUtils.read('uploadImage/setting') || {};

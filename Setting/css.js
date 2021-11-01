@@ -23,21 +23,41 @@ const CustomCss = `
   body {
     /*padding: 20px;*/
     background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .router {
+      max-height: 100vh;
+      overflow-y: auto;
+      padding: 10px 0 10px;
+  }
+  .router::-webkit-scrollbar-track, .router::-webkit-scrollbar-track-piece {
+      border-radius: 0;
+      background: #ffffff;
+  }
+  .router::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background: #c3c3c3;
+      border: none;
+  }
+  .router::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
   }
   #showTips {
-      padding: 4px;
-      position: absolute;
+      padding: 6px;
+      position: fixed;
       width: auto;
       transform: translateX(-50%);
       top: 0;
       left: 50%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgb(0, 0, 0);
       line-height: 24px;
       text-align: center;
       color: #fff;
       border-radius: 10px;
       display: none;
       transition: all 200ms linear;
+      z-index: 100;
   }
   
   .form-button-group {
@@ -112,6 +132,8 @@ const CustomCss = `
       width: 350px;
       border: none;
       border-bottom: 1px dashed rgba(82,100,174, 0.6);
+      background: #ffffff !important;
+      color: #000000 !important;
   }
 
   .inputBox input:focus {

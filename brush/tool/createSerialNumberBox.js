@@ -1,10 +1,10 @@
-import dragMove from '../lib/dragmove.js';
+import dragMove from '../dragmove.js';
 const config = {
     group: 1,
     position: 8,
     icon: '&#xe63e;',
     name: 'serialNumberBox',
-    useKeyword: 'ctrl+t',
+    useKeyword: 'ctrl+y',
     settingBox: 'textBox',
     canvas: false,
     hint: '序号工具',

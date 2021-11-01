@@ -70,18 +70,23 @@ export function toolBoxInit() {
     const hideToolNames = data.filter(item => !item.enable).map(item => item.name);
     console.log(hideToolNames);
     const configs = Object.keys(tool).map(key => {
-        if (tool[key].config) {
+        const config = tool[key].config;
+        if (config) {
+            // 绑定按键事件
+            if (config.useKeyword) {
+                const keyData = UToolsUtils.read('globalKey') || {};
+                if (keyData[config.name]) {
+                    config.useKeyword = keyData[config.name].split('|');
+                }
+                window.Mousetrap.bind(config.useKeyword,
+                    () => this.setCurrentTool(config.name));
+            }
             // 配置默认值
-            if (!tool[key].config.group) {
+            if (!config.group) {
                 tool[key].config.group = 0;
             }
-            if (!tool[key].config.position) {
+            if (!config.position) {
                 tool[key].config.position = Date.now();
-            }
-            if (tool[key].config.useKeyword) {
-                // 绑定按键事件
-                window.Mousetrap.bind(tool[key].config.useKeyword,
-                    () => this.setCurrentTool(tool[key].config.name));
             }
             return tool[key].config;
         }

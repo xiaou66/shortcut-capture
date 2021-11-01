@@ -43,7 +43,7 @@ class ToolShowSwitch extends Component{
     }
     render(_update) {
         return jsx `
-             <div style="margin-top: 15px;display: grid;justify-items: center;grid-template-columns: 45% 45%;width: 100%;">
+             <div style="display: grid;justify-items: center;grid-template-columns: 45% 45%;width: 100%;">
                 ${this.toolData.map(item => (
                     jsx`
                         <div class="form-item">

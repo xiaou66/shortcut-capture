@@ -6,13 +6,6 @@ const config = {
     useKeyword: 'ctrl+q',
     hint: '识别',
 }
-const data = window.UToolsUtils.read('globalKey');
-if (data) {
-    const keyword = data[config.name]
-    if (keyword) {
-        config.useKeyword = keyword.split('|');
-    }
-}
 // 工具初始化
 function init(priorToolName, toolName) {
     this.canvasToBase64().then(imageBase64 => {

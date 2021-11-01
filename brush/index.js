@@ -1,6 +1,5 @@
 // var canvasImg = document.getElementById("canvas_img")
 try {
-
     console.log(process.env.NODE_ENV);
 }catch (e) {
 }
@@ -135,7 +134,6 @@ class Palette {
             // 全局快捷键事件注册
             const data = window.UToolsUtils.read('globalKey');
             window.Mousetrap.bind(data['tab']?.split("|") || 'tab', () => this.switchToolBox());
-            window.Mousetrap.bind(data['close']?.split("|") || 'esc',() => window.ipcRendererUtils.winClose());
             window.Mousetrap.bind(data['save']?.split("|") || 'ctrl+s', () => this.saveImageToFile());
             window.Mousetrap.bind(data['copy']?.split("|") || 'ctrl+c', async () => utools.copyImage(await this.canvasToBase64()));
             window.Mousetrap.bind(data['randomColor']?.split("|") || 'ctrl+r', () => {
@@ -159,6 +157,7 @@ class Palette {
                 document.querySelectorAll('.text_input').forEach(item => {
                     item.remove();
                 })
+                document.getElementById('serial_number_box').innerHTML = '';
             });
             this.$mainContainer.onmouseleave = (e) => {
                 // 清理浮标
