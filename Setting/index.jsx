@@ -3,7 +3,7 @@ const { PureCss, CustomCss } = require('./css.js');
 const ToolSetting = require('./ToolSetting/index.jsx');
 const GlobalKeyWord = require('./GlobalKeyWord/index.jsx');
 const ToolShowSwitch = require('./ToolShowSwitch/index.jsx');
-const { enable:  enableDarkMode } = require('darkreader');
+const { enable:  enableDarkMode, disable:  disableDarkMode} = require('darkreader');
 class SettingUI extends Component{
     settingMenu = {
         currentMenu: '工具设置',
@@ -15,15 +15,27 @@ class SettingUI extends Component{
     }
     constructor(props) {
         super(props);
-        if (utools.isDarkColors()) {
-            enableDarkMode();
-        }
     }
     swatchMenu({name}) {
         this.settingMenu.currentMenu = name;
         this.update();
     }
+    didMount() {
+        console.log('1111')
+        return super.didMount();
+    }
+    setTheme() {
+        if (utools.isDarkColors()) {
+            enableDarkMode({
+                darkSchemeBackgroundColor: '#303133'
+            });
+        } else {
+            disableDarkMode();
+        }
+    }
     render() {
+        this.setTheme();
+        window.setSettingTheme = this.setTheme;
         return jsx`
          <div id="setting">
             <div class="pure-g">

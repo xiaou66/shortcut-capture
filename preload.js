@@ -116,7 +116,12 @@ window.exports = {
         mode: 'none',
         args: {
             enter(action, callback) {
-                utools.setExpendHeight(480)
+                utools.setExpendHeight(480);
+                setTimeout(() => {
+                   if (window.setSettingTheme) {
+                       window.setSettingTheme();
+                   }
+                }, 150);
                 Nano.render(jsx`${SettingUI()}`, document.documentElement)
             }
         }

@@ -10,7 +10,7 @@ module.exports = {
         'brush/index': './brush/index.js',
         'brush/preload': './brush/preload.js',
         'brush/tool/index': './brush/tool/index.js',
-        'utils/UToolsUtils': './utils/UToolsUtils.js',
+        // 'utils/UToolsUtils': './utils/UToolsUtils.js',
     },
     optimization: {
         minimizer: [new UglifyJsPlugin({
@@ -44,6 +44,7 @@ module.exports = {
                 { from: 'brush/lib', to: 'brush/lib' },
                 { from: 'brush/font', to: 'brush/font' },
                 { from: 'brush/css', to: 'brush/css' },
+                { from: 'utils', to: 'utils'}
             ],
         }),
     ],
