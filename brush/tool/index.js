@@ -113,21 +113,20 @@ export function toolBoxInit() {
         // 生成分隔符
         const $separator = document.createElement('div');
         $separator.className = 'separator';
-        $toolbar.append($separator);
-        configs.map(config => {
+        $toolbar.append($separator, ...configs.map(config => {
             // 生成工具
             const $tool = document.createElement('div');
             $tool.id = `tool-${config.name}`;
             $tool.className = 'iconfont tool';
             $tool.innerHTML = config.icon;
             $tool.setAttribute('name', config.name);
-            $toolbar.append($tool);
             if (config.hint) {
                 tippy(`#tool-${config.name}`, {
                     content: config.hint,
                 });
             }
-        });
+            return $tool;
+        }));
     })
     // 删除第一个分隔符
     document.querySelector('#toolbar>.separator:first-child')?.remove();
