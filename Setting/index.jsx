@@ -1,5 +1,5 @@
 const { Fragment, jsx, Component } = require('nano-jsx');
-const { PureCss, CustomCss } = require('./css.js');
+const { CustomCss } = require('./css.js');
 const ToolSetting = require('./ToolSetting/index.jsx');
 const GlobalKeyWord = require('./GlobalKeyWord/index.jsx');
 const ToolShowSwitch = require('./ToolShowSwitch/index.jsx');
@@ -38,17 +38,15 @@ class SettingUI extends Component{
         window.setSettingTheme = this.setTheme;
         return jsx`
          <div id="setting">
-            <div class="pure-g">
-                <div class="pure-u-1-5">
-                 ${this.settingMenu.menus.map((item) => (
-                   jsx` <div class="${this.settingMenu.currentMenu === item.name ? 'menu active' : 'menu'}" 
-                               onClick=${() => this.swatchMenu(item)}>
-                            ${item.name}
-                        </div>`))}
-                </div>
-                <div class="pure-u-4-5 content router" style="position:relative;">
-                    <${this.settingMenu.menus.find(item => item.name === this.settingMenu.currentMenu).component}/>
-                </div>
+            <div>
+             ${this.settingMenu.menus.map((item) => (
+               jsx` <div class="${this.settingMenu.currentMenu === item.name ? 'menu active' : 'menu'}" 
+                           onClick=${() => this.swatchMenu(item)}>
+                        ${item.name}
+                    </div>`))}
+            </div>
+            <div class="content router" style="position:relative;">
+                <${this.settingMenu.menus.find(item => item.name === this.settingMenu.currentMenu).component}/>
             </div>
           </div>`
     }
@@ -59,7 +57,6 @@ const app = () => {
 <head>
   <title>Setting</title>
   <script src="index.js"/>
-  <style>${PureCss}</style>
   <style>${CustomCss}</style>
 </head>
 <body>

@@ -1,26 +1,21 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
     mode: 'production',
     target: 'node',
     entry:  {
-        preload: './preload.js',
         'brush/index': './brush/index.js',
         'brush/preload': './brush/preload.js',
         'brush/tool/index': './brush/tool/index.js',
         // 'utils/UToolsUtils': './utils/UToolsUtils.js',
     },
     optimization: {
-        minimizer: [new UglifyJsPlugin({
-            uglifyOptions: {
-                compress: {
-                    dead_code: true,
-                    loops: true,
-                },
-                mangle: false
-            }
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            // 启用多进程并发运行
+            parallel: true,
         })]
     },
     plugins: [
