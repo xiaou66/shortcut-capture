@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "build": "webpack"
+  },
+  "dependencies": {
+    "darkreader": "^4.9.39",
+    "mousetrap-record": "^1.0.1",
+    "nano-jsx": "^0.0.20"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.5.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.3",
+    "optimize-css-assets-webpack-plugin": "^6.0.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "utools-api-types": "^2.3.0",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
