@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "darkreader": "^4.9.39",
+    "fast-png": "^6.1.0",
     "mousetrap-record": "^1.0.1",
     "nano-jsx": "^0.0.20"
   },

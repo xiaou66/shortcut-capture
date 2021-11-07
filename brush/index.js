@@ -1,8 +1,4 @@
 // var canvasImg = document.getElementById("canvas_img")
-try {
-    console.log(process.env.NODE_ENV);
-}catch (e) {
-}
 import tool, { toolBoxInit, getToolConfig, getToolEvent } from './tool/index.js';
 const mineMap = {
     "image/bmp" : "bmp",
@@ -72,6 +68,8 @@ class Palette {
             // 缩放比例
             this.radio = getPixelRatio(this.mainContext);
             // 容器
+            this.imageWidth = image.width;
+            this.imageHeight = image.height;
             this.containerWidth = image.width / this.radio;
             this.containerHeight = image.height / this.radio;
             if (window.ipcRendererUtils) {
@@ -227,15 +225,21 @@ class Palette {
         }
     }
     async canvasToBase64() {
-        this.$cursor.style.display = 'none';
         this.$mainContainer.style.borderRadius = '0';
         this.$mainContainer.style.boxShadow = 'nonce';
+        const canvas2 = document.createElement("canvas");
+        canvas2.width = this.imageWidth * this.radio;
+        canvas2.height = this.imageHeight * this.radio;
+        canvas2.style.width = `${this.containerWidth}px`;
+        canvas2.style.height = `${this.containerHeight}px`;
         return await html2canvas(this.$mainContainer, {
-            backgroundColor: null
-        }).then((canvas) => {
-            this.$mainContainer.style.borderRadius = '6px';
-            this.$mainContainer.style.boxShadow = '1px 1px 6px #c8c8c8';
-            return canvas.toDataURL();
+            backgroundColor: null,
+            canvas: canvas2,
+            removeContainer: false,
+        }).then(async (canvas) => {
+            const imageData = canvas.getContext('2d').getImageData(0,0,this.containerWidth * this.radio,this.containerHeight * this.radio);
+            const base64 = 'data:image/png;base64,' + window.imageDataToBase64(imageData)
+            return base64
         })
     }
     async saveImageToFile() {

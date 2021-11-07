@@ -27,3 +27,7 @@ window.saveFileByBase64 = (defaultPath, base64) => {
         utools.showNotification("保存成功")
     }
 }
+const { encode } = require('fast-png');
+window.imageDataToBase64 = (imageData) => {
+    return new Buffer(encode(imageData)).toString('base64');
+}
