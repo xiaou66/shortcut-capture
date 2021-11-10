@@ -161,14 +161,13 @@ input {
 #serial_number_box>div::after {
     content: '';
     position: absolute;
-    left: -5.5px;
+    left: -10px;
     top: 8px;
     display: block;
-    width: 6px;
-    height: 12px;
-    background: pink;
-    clip-path: polygon(0 50%, 100% 100%, 100% 0);
-    background: rgba(0,0,0,0.7);
+    /*clip-path: polygon(0 50%, 100% 100%, 100% 0);*/
+    border-top: 5px solid transparent;
+    border-right: 10px solid rgba(0,0,0,0.7);
+    border-bottom: 5px solid transparent;
 }
 /* 编号 */
 
