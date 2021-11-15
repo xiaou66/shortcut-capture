@@ -8,11 +8,11 @@ const config = {
     cursor: true,
     hint: '马赛克',
 }
-let size = 10;
+let size = 12;
 function mouseMove(e) {
     const {startX, startY} = this.startPosition;
 
-    const data = this.mainContext.getImageData(e.offsetX / 2, e.offsetY / 2, size, size).data;
+    const data = this.mainContext.getImageData(e.offsetX, e.offsetY, size, size).data;
     let r = 0, g = 0, b = 0;
     for (let row = 0; row < size; row ++) {
         for (let col = 0; col < size; col++) {
@@ -25,11 +25,9 @@ function mouseMove(e) {
     g = Math.round(g / (size * size));
     b = Math.round(b / (size * size));
     const color = `rgba(${r}, ${g}, ${b}, 0.8)`;
-    this.drawContext.beginPath()
     this.drawContext.save()
     this.drawContext.fillStyle = color
     this.drawContext.fillRect(e.offsetX, e.offsetY - (size / 2), size, size)
-    this.drawContext.restore()
 }
 function init() {
     this.setCursorSize(size, false);
