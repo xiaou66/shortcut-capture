@@ -53,6 +53,7 @@ class Palette {
             // 初始化工具
             toolBoxInit.bind(this)();
             // 一些变量处理
+            this.$containerOuter = document.getElementById('container_outer');
             this.$mainContainer = document.getElementById('container');
             this.$mainCanvas = document.getElementById('mainCanvas');
             this.$frontCanvas = document.getElementById('frontCanvas');
@@ -61,6 +62,7 @@ class Palette {
             this.$toolbar = document.getElementById('toolbar');
             this.$cursor = document.getElementById('cursor');
             this.$tips = document.getElementById('tips');
+            this.$containerMove = document.getElementById('container_move');
             // 画板上下文对象
             this.drawContext = this.$drawCanvas.getContext("2d");
             this.frontContext = this.$frontCanvas.getContext("2d");
@@ -106,15 +108,18 @@ class Palette {
             this.$drawCanvas.style.width = `${this.containerWidth}px`;
             this.$drawCanvas.style.height = `${this.containerHeight}px`;
 
+            this.$containerMove.style.width = `${this.containerWidth}px`;
+            this.$containerMove.style.height = `${this.containerHeight}px`;
             // 处理画板问题
             this.drawContext.scale(this.radio, this.radio);
             this.frontContext.scale(this.radio, this.radio);
             // 裁剪多余的画板
+            // this.$containerOuter.style.width = `${this.containerWidth}px`;
+            // this.$containerOuter.style.height = `${ this.containerHeight}px`;
             this.$mainContainer.style.width = `${this.containerWidth}px`;
             this.$mainContainer.style.height = `${ this.containerHeight}px`;
-            const $containerOuter =  document.getElementById('container_outer')
-            $containerOuter.style.width = `${this.containerWidth + 10}px`;
-            $containerOuter.style.height = `${this.containerHeight + 10}px`;
+            this.$containerOuter.style.width = `${this.containerWidth + 10}px`;
+            this.$containerOuter.style.height = `${this.containerHeight + 10}px`;
             this.$mainContainer.style.overflow = 'hidden';
             // 绘制图片
             this.mainContext.drawImage(image, 0, 0, image.width, image.height);
@@ -225,6 +230,8 @@ class Palette {
         }
     }
     async canvasToBase64() {
+        this.setCurrentTool('move');
+        this.$cursor.style.display = 'none';
         this.$mainContainer.style.borderRadius = '0';
         this.$mainContainer.style.boxShadow = 'nonce';
         const canvas2 = document.createElement("canvas");
@@ -237,6 +244,7 @@ class Palette {
             canvas: canvas2,
             removeContainer: false,
         }).then(async (canvas) => {
+            this.$mainContainer.style.borderRadius = '6px';
             const imageData = canvas.getContext('2d').getImageData(0,0,this.containerWidth * this.radio,this.containerHeight * this.radio);
             const base64 = 'data:image/png;base64,' + window.imageDataToBase64(imageData)
             return base64

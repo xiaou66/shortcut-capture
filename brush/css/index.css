@@ -55,6 +55,7 @@ input {
     display: none;
     overflow-y: auto;
     max-height: 700px;
+    position: fixed !important;
 }
 
 #container, #toolbar {

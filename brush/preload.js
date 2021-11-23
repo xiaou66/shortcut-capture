@@ -1,11 +1,5 @@
 const IpcRendererUtils = require('./IpcRendererUtils')
 const fs = require('fs');
-// ipcRenderer.on("init", (event, data) => {
-//     mainId = event.senderId;
-//     const {dataURL} = JSON.parse(data);
-//     window.setImage(dataURL)
-//     console.log(event, data)
-// })
 window.ipcRendererUtils = new IpcRendererUtils({
     initCallback: (data) => {
         const {dataURL, scale} = data;
