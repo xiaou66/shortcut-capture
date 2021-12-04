@@ -62,7 +62,6 @@ input {
     box-shadow: 1px 1px 6px #c8c8c8;
     border-radius: 6px;
 }
-
 /* 其它画板 */
 #container_move, #mainCanvas, #frontCanvas, #drawCanvas, #textBox {
     position: absolute;

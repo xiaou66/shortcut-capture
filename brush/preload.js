@@ -13,7 +13,10 @@ window.saveFileByBase64 = (defaultPath, base64) => {
     let savePath = utools.showSaveDialog({
         title: '保存图片',
         defaultPath,
-        buttonLabel: '保存'
+        buttonLabel: '保存',
+        filters: [
+            { name: 'Images', extensions: ['png'] },
+        ]
     })
     if (savePath) {
         const dataBuffer = Buffer.from(base64, 'base64');
