@@ -20,6 +20,9 @@ function getBase64Image(img) {
     ctx.drawImage(img, 0, 0, img.width, img.height);
     return canvas.toDataURL("image/png");
 }
+utools.onPluginReady(() => {
+    UToolsUtils.save('preSavePath', { value: '' });
+});
 const createWindow = async (imgBase64, callback = undefined) => {
     const point = utools.getCursorScreenPoint();
     const display = utools.getDisplayNearestPoint(point)

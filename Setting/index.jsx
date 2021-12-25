@@ -21,7 +21,6 @@ class SettingUI extends Component{
         this.update();
     }
     didMount() {
-        console.log('1111')
         return super.didMount();
     }
     setTheme() {

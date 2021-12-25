@@ -1,5 +1,6 @@
 // var canvasImg = document.getElementById("canvas_img")
 import tool, { toolBoxInit, getToolConfig, getToolEvent } from './tool/index.js';
+import Utils from './utils/utils.js'
 const mineMap = {
     "image/bmp" : "bmp",
     "image/gif" : "gif",
@@ -138,6 +139,11 @@ class Palette {
             const data = window.UToolsUtils.read('globalKey');
             window.Mousetrap.bind(data['tab']?.split("|") || 'tab', () => this.switchToolBox());
             window.Mousetrap.bind(data['save']?.split("|") || 'ctrl+s', () => this.saveImageToFile());
+            window.Mousetrap.bind('ctrl+shift+s', () => {
+                this.saveImageToFile().then(res => {
+                    window.ipcRendererUtils.winClose();
+                });
+            });
             window.Mousetrap.bind(data['copy']?.split("|") || 'ctrl+c', async () => utools.copyImage(await this.canvasToBase64()));
             window.Mousetrap.bind(data['randomColor']?.split("|") || 'ctrl+r', () => {
                 if (getToolConfig(this.currentTool).settingBox === 'color&size') {
@@ -254,7 +260,15 @@ class Palette {
         const imageBase64 = await this.canvasToBase64();
         let [src, type, base64] = imageBase64.match(/^data:(image\/.+);base64,(.*)/)
         let suffix = mineMap[type]
-        const defaultPath = utools.getPath('downloads') + "/" + new Date().getTime() + "." + suffix
+        const preSavePath = UToolsUtils.read('preSavePath') || { value: '' };
+        let defaultPath = preSavePath.value ? preSavePath.value : utools.getPath('downloads');
+        const data = UToolsUtils.read('SaveFileName/setting');
+        if (data && data.filenameFormat) {
+            defaultPath = window.path.join(defaultPath, Utils.getSavePath(data.filenameFormat, ''));
+        } else {
+            defaultPath = window.path.join(defaultPath, Date.now().toString())
+        }
+        defaultPath += '.' + suffix;
         window.saveFileByBase64(defaultPath, base64);
     }
     clearFrontContext() {
