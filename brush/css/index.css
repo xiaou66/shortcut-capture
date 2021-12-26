@@ -2,10 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    pointer-events: all;
 }
 body {
     position: relative;
     overflow: hidden;
+    pointer-events: none;
 }
 input {
     outline: none;

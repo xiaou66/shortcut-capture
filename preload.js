@@ -183,6 +183,17 @@ ipcRenderer.on('goto:suspension', (event, data) => {
     utools.redirect('悬浮base64图片', `${base64}#x=${x}&y=${y}&displayId=${display.id}`);
 });
 
+ipcRenderer.on('control::setIgnoreMouseEvents', (event, data) => {
+    debugger
+    const {res, index} = getRunItemById(event.senderId);
+    const { value }  = JSON.parse(data);
+    if (value) {
+        res.win.setIgnoreMouseEvents(true, { forward: true })
+    } else {
+        res.win.setIgnoreMouseEvents(false)
+    }
+})
+
 /**
  * 将 a=1&b=2 转换为对象{a: '1', b: '2'}
  * @param queryStr

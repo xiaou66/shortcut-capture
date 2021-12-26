@@ -24,6 +24,9 @@ class IpcRendererUtils {
         }
 
     }
+    setIgnoreMouseEvents(value) {
+        this.sendMainMessage('control::setIgnoreMouseEvents', { value });
+    }
     /**
      * 发送信息到主窗口
      * @param messageId

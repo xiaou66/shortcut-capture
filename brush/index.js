@@ -178,6 +178,9 @@ class Palette {
                 // this.setCurrentTool('move');
                 // this.clearFrontContext();
             }
+            if (utools.isMacOs()) {
+                ipcRendererUtils.setIgnoreMouseEvents(true);
+            }
             this.$mainContainer.onmouseenter = (e) => {
                 if(getToolConfig(this.currentTool).cursor) {
                     this.$cursor.style.display = 'block';
@@ -394,4 +397,19 @@ document.querySelectorAll('.colorChunkBox').forEach($div => {
             console.log('11111')
         }
     })
-})
+});
+
+if (utools.isMacOs()) {
+    // fix macOS 鼠标事件无法穿透的问题
+    let t;
+    window.addEventListener('mousemove', e => {
+        if (e.target === document.documentElement) {
+            ipcRendererUtils.setIgnoreMouseEvents(false);
+            if (t) clearTimeout(t)
+            t = setTimeout(function() {
+                ipcRendererUtils.setIgnoreMouseEvents(true);
+            }, 150)
+        } else ipcRendererUtils.setIgnoreMouseEvents(false);
+    })
+}
+
