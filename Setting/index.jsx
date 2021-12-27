@@ -3,6 +3,7 @@ const { CustomCss } = require('./css.js');
 const ToolSetting = require('./ToolSetting/index.jsx');
 const GlobalKeyWord = require('./GlobalKeyWord/index.jsx');
 const ToolShowSwitch = require('./ToolShowSwitch/index.jsx');
+const OtherSetting = require('./OtherSetting/index.jsx');
 const { enable:  enableDarkMode, disable:  disableDarkMode} = require('darkreader');
 class SettingUI extends Component{
     settingMenu = {
@@ -10,7 +11,8 @@ class SettingUI extends Component{
         menus: [
             {id: 1, name: '工具设置', component: ToolSetting},
             {id: 2, name: '全局快捷键', component: GlobalKeyWord},
-            {id: 3, name: '工具显示切换', component: ToolShowSwitch}
+            {id: 3, name: '工具显示切换', component: ToolShowSwitch},
+            {id: 4, name: '其他设置', component: OtherSetting},
         ]
     }
     constructor(props) {

@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const Nano = require('nano-jsx');
 const {jsx} = require('nano-jsx');
+const UToolsUtils = require('./utils/UToolsUtils.js');
 const {SettingUI} = require('./Setting/index.jsx');
 window.runList = [];
 const buildImage = async (base64) => {
@@ -25,7 +26,7 @@ utools.onPluginReady(() => {
 });
 const createWindow = async (imgBase64, callback = undefined) => {
     const point = utools.getCursorScreenPoint();
-    const display = utools.getDisplayNearestPoint(point)
+    const display = utools.getDisplayNearestPoint(point);
     console.log(imgBase64)
     const image = await buildImage(imgBase64);
     console.log(point);
@@ -54,8 +55,12 @@ const createWindow = async (imgBase64, callback = undefined) => {
         const {width, height} = image;
         const x = point.x - width;
         const y = point.y - height;
+        const { autoCenter = false } = UToolsUtils.read('screenshotsPosition/setting') || {};
         win.setPosition(x < 0 ? 0 : x >= display.size.width ? display.size.width : x,
             y < 0 ? 0 : y >= display.size.height ? display.size.height : y);
+        if (autoCenter) {
+            win.hide()
+        }
         // win.setResizable(false)
         ipcRenderer.sendTo(win.webContents.id, 'init', JSON.stringify(data));
         console.log(point)
@@ -168,6 +173,11 @@ ipcRenderer.on('control::resize', (event, data) => {
     const size = res.win.getSize();
     const {width = size[0], height = size[1]} = data;
     res.win.setSize(Math.floor(width), Math.floor(height));
+    const { autoCenter = false } = UToolsUtils.read('screenshotsPosition/setting') || {};
+    if (autoCenter) {
+        res.win.center();
+        res.win.show();
+    }
 })
 ipcRenderer.on('goto:suspension', (event, data) => {
     debugger;
