@@ -243,6 +243,11 @@ class Palette {
         this.$cursor.style.display = 'none';
         this.$mainContainer.style.borderRadius = '0';
         this.$mainContainer.style.boxShadow = 'nonce';
+        // const { borderStatus = false, borderStyle = '2px solid #000' }
+        //   = UToolsUtils.read('borderStyle/setting') || {};
+        // if (borderStatus) {
+        //     this.$mainCanvas.style.border = borderStyle;
+        // }
         const canvas2 = document.createElement("canvas");
         canvas2.width = this.imageWidth * this.radio;
         canvas2.height = this.imageHeight * this.radio;
@@ -254,6 +259,7 @@ class Palette {
             removeContainer: false,
         }).then(async (canvas) => {
             this.$mainContainer.style.borderRadius = '6px';
+            this.$mainCanvas.style.border = 'none';
             const imageData = canvas.getContext('2d').getImageData(0,0,this.containerWidth * this.radio,this.containerHeight * this.radio);
             const base64 = 'data:image/png;base64,' + window.imageDataToBase64(imageData)
             return base64

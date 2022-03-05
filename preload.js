@@ -39,7 +39,7 @@ const createWindow = async (imgBase64, callback = undefined) => {
         transparent: true,
         backgroundColor: '#00000000',
         frame: false,
-        alwaysOnTop: true,
+        alwaysOnTop: false,
         // resizable: false,
         webPreferences: {
             preload: './brush/preload.js',
@@ -61,13 +61,13 @@ const createWindow = async (imgBase64, callback = undefined) => {
         if (autoCenter) {
             win.hide()
         }
-        // win.setResizable(false)
         ipcRenderer.sendTo(win.webContents.id, 'init', JSON.stringify(data));
         console.log(point)
         console.log(display)
         if (callback && typeof callback == 'function') {
             callback(win);
         }
+        win.setAlwaysOnTop(true);
         runList.push({ winId: win.webContents.id, win })
     })
 }

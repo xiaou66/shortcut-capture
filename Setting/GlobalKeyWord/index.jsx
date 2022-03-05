@@ -80,7 +80,7 @@ class ToolSetting extends Component{
                   <span class="highlight"></span>
                   <span class="bar"></span>
                   <label for="${dataKey}">快捷键按「|」分割,按「alt + r」开始录制</label>
-              </div>
+                 </div>
             </div>
         `))
         return html;
