@@ -21,9 +21,13 @@ function getBase64Image(img) {
     ctx.drawImage(img, 0, 0, img.width, img.height);
     return canvas.toDataURL("image/png");
 }
-utools.onPluginReady(() => {
+if (!utools.onPluginReady) {
     UToolsUtils.save('preSavePath', { value: '' });
-});
+}else  {
+    utools.onPluginReady(() => {
+        UToolsUtils.save('preSavePath', { value: '' });
+    });
+}
 const createWindow = async (imgBase64, callback = undefined) => {
     const point = utools.getCursorScreenPoint();
     const display = utools.getDisplayNearestPoint(point);
@@ -33,6 +37,8 @@ const createWindow = async (imgBase64, callback = undefined) => {
     const win = utools.createBrowserWindow('./brush/index.html',{
         title: 'img',
         useContentSize: true,
+        height: 0,
+        width: 0,
         // 不能最大最小化
         minimizable: false,
         // 背景透明，防止放大缩小时出现白框
