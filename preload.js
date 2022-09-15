@@ -93,6 +93,23 @@ window.exports = {
             }
         }
     },
+    "delayShortcutCapture": {
+        mode: "none",
+        args: {
+            enter: async (action) => {
+                document.getElementById('setting')?.remove();
+                const displays = utools.getAllDisplays()
+                console.log(displays)
+                setTimeout(function () {
+                    utools.screenCapture(async (imgBase64) => {
+                        await createWindow(imgBase64);
+                        utools.outPlugin();
+                    });
+                }, 3000);
+                utools.hideMainWindow();
+            }
+        }
+    },
     "pictureBase64": {
         mode: "none",
         args: {

@@ -10,13 +10,16 @@
       "code": "shortcutCapture",
       "explain": "截图工具",
       "cmds": ["shortcutCapture", "sc", "截屏", "截图"]
-
+    },
+    {
+      "code": "delayShortcutCapture",
+      "explain": "触发后延时3s开始截图",
+      "cmds": ["延时截图", "dsc"]
     },
     {
       "code": "shortcutCapture&copy",
       "explain": "截图并复制",
       "cmds": ["截图并复制", "scc"]
-
     },
     {
       "code": "shortcutCaptureSetting",
