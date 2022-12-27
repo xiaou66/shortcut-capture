@@ -73,7 +73,7 @@ const createWindow = async (imgBase64, callback = undefined) => {
         if (callback && typeof callback == 'function') {
             callback(win);
         }
-        win.setAlwaysOnTop(true);
+        win.setAlwaysOnTop(true, 'screen-saver');
         runList.push({ winId: win.webContents.id, win })
     })
 }
