@@ -9,7 +9,7 @@ const config = {
 // 工具初始化
 function init(priorToolName, toolName) {
     this.canvasToBase64().then(imageBase64 => {
-        const {ocrName = 'ocr'} = window.UToolsUtils.read('ocr/setting') || {};
+        const {ocrName = 'OCR 文字识别'} = window.UToolsUtils.read('ocr/setting') || {};
         utools.showMainWindow();
         utools.redirect(ocrName, {
             'type': 'img',

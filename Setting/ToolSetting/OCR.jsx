@@ -4,7 +4,7 @@ class OCR extends Component{
     saveKey = 'ocr/setting';
     constructor(props) {
         super(props);
-        const {ocrName = 'ocr'} = UToolsUtils.read(this.saveKey) || {};
+        const {ocrName = 'OCR 文字识别'} = UToolsUtils.read(this.saveKey) || {};
         this.data = { ocrName };
     }
     saveData() {

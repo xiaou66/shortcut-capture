@@ -3,6 +3,10 @@ const Nano = require('nano-jsx');
 const {jsx} = require('nano-jsx');
 const UToolsUtils = require('./utils/UToolsUtils.js');
 const {SettingUI} = require('./Setting/index.jsx');
+const fs = require('fs');
+const Path = require("path");
+const {getSavePath} = require('./utils/utils');
+const {saveBase64} = require('./utils/generalUtils');
 window.runList = [];
 const buildImage = async (base64) => {
     return new Promise((resolve, reject) => {
@@ -12,14 +16,6 @@ const buildImage = async (base64) => {
             resolve(image);
         }
     })
-}
-function getBase64Image(img) {
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, img.width, img.height);
-    return canvas.toDataURL("image/png");
 }
 if (!utools.onPluginReady) {
     UToolsUtils.save('preSavePath', { value: '' });
@@ -141,6 +137,19 @@ window.exports = {
                     });
                     utools.hideMainWindow();
                 }
+        }
+    },
+    "shortcutCapture&save": {
+        mode: "none",
+        args: {
+            enter: async () => {
+                utools.screenCapture(async (imgBase64) => {
+                    const savePath = getSavePath(imgBase64);
+                    saveBase64(imgBase64, savePath);
+                    utools.shellShowItemInFolder(savePath);
+                    utools.outPlugin();
+                });
+            }
         }
     },
     "shortcutCaptureSetting": {

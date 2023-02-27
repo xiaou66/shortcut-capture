@@ -22,6 +22,11 @@
       "cmds": ["截图并复制", "scc"]
     },
     {
+      "code": "shortcutCapture&save",
+      "explain": "截图并保存",
+      "cmds": ["截图并保存", "scs"]
+    },
+    {
       "code": "shortcutCaptureSetting",
       "explain": "截图设置",
       "cmds": ["截图设置", "sx"]
